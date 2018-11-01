@@ -1,0 +1,11 @@
+C:\CIDM3312\MidTerm_3312\bin\MCD\Debug\netcoreapp2.1\MidTerm_3312.deps.json
+C:\CIDM3312\MidTerm_3312\bin\MCD\Debug\netcoreapp2.1\MidTerm_3312.runtimeconfig.json
+C:\CIDM3312\MidTerm_3312\bin\MCD\Debug\netcoreapp2.1\MidTerm_3312.runtimeconfig.dev.json
+C:\CIDM3312\MidTerm_3312\bin\MCD\Debug\netcoreapp2.1\MidTerm_3312.dll
+C:\CIDM3312\MidTerm_3312\bin\MCD\Debug\netcoreapp2.1\MidTerm_3312.pdb
+C:\CIDM3312\MidTerm_3312\obj\MCD\Debug\netcoreapp2.1\MidTerm_3312.csprojAssemblyReference.cache
+C:\CIDM3312\MidTerm_3312\obj\MCD\Debug\netcoreapp2.1\MidTerm_3312.csproj.CoreCompileInputs.cache
+C:\CIDM3312\MidTerm_3312\obj\MCD\Debug\netcoreapp2.1\MidTerm_3312.AssemblyInfoInputs.cache
+C:\CIDM3312\MidTerm_3312\obj\MCD\Debug\netcoreapp2.1\MidTerm_3312.AssemblyInfo.cs
+C:\CIDM3312\MidTerm_3312\obj\MCD\Debug\netcoreapp2.1\MidTerm_3312.dll
+C:\CIDM3312\MidTerm_3312\obj\MCD\Debug\netcoreapp2.1\MidTerm_3312.pdb
