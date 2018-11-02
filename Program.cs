@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -25,8 +25,10 @@ namespace MidTerm_3312
                 
             }
         }
+    
         //2)In your program, connect to the database and 
         //show all records of Books Published by "APress"
+    
         public static void FindPublisher()
         {
             Console.WriteLine("Printing all Books published by Apress:\n");
@@ -41,25 +43,66 @@ namespace MidTerm_3312
                 }    
             }
         }
+    
 
-        /*public static void FindShortName()
+         //3) In your program, connect to the database and show all records of Books 
+         //whose author's first name is the shortest 
+        //Join statement to get records from both tables
+    
+    
+        public static void FindShortName()
         {
             Console.WriteLine("Printing all Books with the shortest Author First Name:\n");
             using(var db = new AppDbContext())
             {
-                var bookTable = db.Book.Join(db.Author, a => a.Author.AuthorID,
-                                             b => b.Author.AuthorID(a,b))
-                                from Book in books
-                                join shortestName in Author on db.b
+                var bookTable = db.Book.Join(db.Author, 
+                a => a.AuthorID,
+                 d => d.AuthorID,
+                 (a,d) => new{
+                 
+                                Title = a.Title,
+                                Publisher = a.Publisher,
+                                PublishDate = a.PublishDate,
+                                Pages = a.Pages,
+                                AuthorFName = d.AuthorFName,
+                                AuthorLName = d.AuthorFName
+                                });
+            
+        
                                 
-                                select b;
-                foreach(var b in bookTable)
+                var sName = bookTable.Min(d => d.AuthorFName);      
+                var s = bookTable.Where(a => a.AuthorFName == sName);
+                foreach(var b in s) 
                 {
-                    Console.WriteLine(b);
-                }   
+                Console.WriteLine(b);
+                }  
             }
-        }*/
-        //In your program, onnect to the database and find the first book by an author named "Adam" 
+        }
+        //1.In your program, onnect to the database and find the first book by an author named 
+        //"Adam" and print that record to the screen
+        public static void FindBookWrittenBy()
+        {
+            using (var db = new AppDbContext()) 
+            {
+                var bookTable = db.Book.Join(
+                                            db.Author, 
+                                            a => a.AuthorID, 
+                                            b => b.AuthorID, 
+                                            (a, b) => new {
+                                            Title = a.Title,
+                                            Publisher = a.Publisher,
+                                            PublishDate = a.PublishDate,
+                                            Pages = a.Pages,
+                                            AuthorFName = b.AuthorFName,
+                                            AuthorLName = b.AuthorLName
+                                            }).ToList();
+                Console.WriteLine(bookTable.Find(b => b.AuthorFName == "Adam"));        
+             } 
+              
+        }
+        
+
+        //2.In your program, onnect to the database and find the first book by an author named "Adam" 
         //and print that record to the screen
 
         public static void BookfromAuthor()
@@ -75,6 +118,37 @@ namespace MidTerm_3312
                 }
             }
         }
+        //1) Connect to the database and show all Books 
+        //sorted by Author's last name
+        public static void BooksByAuthorLName()
+        {
+            using(var db  = new AppDbContext())
+            {
+                var bookTable = db.Book.Join(
+                            db.Author,
+                            a => a.AuthorID,
+                            b => b.AuthorID,
+                            (a,b) => new
+                            {
+                                Title = a.Title,
+                                Publisher = a.Publisher,
+                                PublishDate = a.PublishDate,
+                                Pages = a.Pages,
+                                AuthorFName = b.AuthorFName,
+                                AuthorLName = b.AuthorLName
+                            });
+                    var nameList = bookTable.OrderBy(b => b.AuthorFName);
+                    foreach(var b in nameList)
+                    {
+                        Console.WriteLine(b);
+                    }
+            
+            }
+        }
+    
+
+    
+
         //2) In your program, onnect to the database and find the first book 
         //whose page count is greater than 1000
         public static void FindPageCount()
@@ -127,11 +201,12 @@ namespace MidTerm_3312
                     }
                 }
             }
-        }
+        }    
+
         static void Main(string[] args)
         {
             SeedDatabase.CreateSeedDatabase();
-
+            
             ReadBookFromDB();
 
             FindPublisher();
@@ -143,8 +218,15 @@ namespace MidTerm_3312
             GroupByPublisher();
 
             BookfromAuthor();
+            FindShortName();
+           FindBookWrittenBy();
         }
-                 
-            
-    }
-}
+    }             
+} 
+ 
+          
+    
+
+
+
+
